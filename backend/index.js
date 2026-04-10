@@ -90,8 +90,8 @@ app.post("/data", (req, res) => {
 app.use((req, res) => res.status(404).json({ status: "error", message: "Not found" }));
 
 // ── Start ────────────────────────────────────────────────────
-server.listen(PORT, () => {
-  console.log(`🚀 Server → http://localhost:${PORT}`);
-  console.log(`   ↳ ESP32 → POST http://YOUR_IP:${PORT}/data`);
-  console.log(`   ↳ App   → Socket.IO http://YOUR_IP:${PORT}`);
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server → Listening on port ${PORT} (0.0.0.0)`);
+  console.log(`   ↳ ESP32 → POST to /data`);
+  console.log(`   ↳ App   → WebSocket connected`);
 });
