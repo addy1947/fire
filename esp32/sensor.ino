@@ -3,11 +3,11 @@
 #include <DHT.h>
 
 // -------- WiFi --------
-const char* WIFI_SSID     = "Garg 2nd Floor";
-const char* WIFI_PASSWORD = "7357000634";
+const char* WIFI_SSID     = "Addy";
+const char* WIFI_PASSWORD = "adityama";
 
 // -------- Backend --------
-const char* SERVER_URL = "http://192.168.0.191:3000/data";
+const char* SERVER_URL = "http://192.168.0.121:3000/data";
 const char* DEVICE_ID  = "ESP32-01";
 
 // -------- Sensors --------

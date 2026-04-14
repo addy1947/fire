@@ -1,0 +1,35 @@
+1. Hardcore Native Push Notifications (Crucial)
+The Problem: Right now, your voice alerts ("Fire! Fire!") only play when your app is actively open on the screen because
+ we use WebSockets.
+The Upgrade: Integrate Expo Push Notifications. If an alert triggers while the phone is locked in your pocket at 3 AM, 
+your backend will send a high-priority push notification that wakes up the phone and makes a loud noise natively.
+
+2. Live Historical Charts (Data Analytics)
+The Upgrade: Stop just showing the current temperature. We can connect a database (like MongoDB or Supabase) to your
+ backend to save every reading.
+In the App: We build a second tab called "Analytics" featuring beautiful, interactive line charts (react-native-gifted-
+charts). You can see exactly what time your kitchen gets the hottest, or if there are tiny, non-critical gas leaks happening 
+every night at 8 PM.
+
+3. Emergency SOS & Twilio SMS Integration
+The Upgrade: Add a settings page in the app where you can save "Emergency Contacts".
+How it works: If flame === 1, your backend automatically uses the Twilio API to fire off an SMS saying: 
+"EMERGENCY: Fire detected at Aditya's ESP32 monitor. Please check immediately!" to those phone numbers. 
+You can also add a massive red "Call Emergency Services" button directly beneath the alert card.
+
+4. Remote Threshold Tuning
+The Upgrade: Right now, the backend hardcodes gasAnalog > 1200. We can add sliders in your app settings to let
+ you customize sensitivity remotely!
+How it works: Drag the "Gas Sensitivity" slider in the app down to 800. The app sends the new rule to the backend, 
+and the backend dynamically updates its monitoring rules without you ever having to re-flash the ESP32.
+
+5. Smart "Device Offline" Detection
+The Upgrade: What if the ESP32 loses power or the Wi-Fi drops, and a fire starts right after? You would never know.
+How it works: The backend expects a heartbeat every 2 seconds. If 10 seconds pass with no HTTP POST, the backend emits 
+out a "device_offline" socket event. The app's green pulsing dot turns grey, and it warns you: "Connection to sensor lost. 
+Please check power."
+
+6. Multi-Room Dashboard
+The Upgrade: Right now it says Device: ESP32-01. If you buy a second ESP32, you can put one in the Kitchen and one in 
+the Bedroom. We can upgrade the UI dashboard to show "Cards" for each room, allowing you to monitor your entire house
+ simultaneously.
