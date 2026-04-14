@@ -7,7 +7,8 @@ const char* WIFI_SSID     = "Addy";
 const char* WIFI_PASSWORD = "adityama";
 
 // -------- Backend --------
-const char* SERVER_URL = "http://192.168.0.121:3000/data";
+// const char* SERVER_URL = "http://192.168.0.121:3000/data";
+const char* SERVER_URL = "https://fire-1-l13l.onrender.com/data";
 const char* DEVICE_ID  = "ESP32-01";
 
 // -------- Sensors --------
