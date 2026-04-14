@@ -56,13 +56,15 @@ async function sendPushNotifications(title, body, data = {}) {
   for (const chunk of chunks) {
     try {
       const receipts = await expo.sendPushNotificationsAsync(chunk);
-      receipts.forEach((receipt) => {
+      receipts.forEach((receipt, idx) => {
         if (receipt.status === "error") {
-          console.error("❌ Push error:", receipt.message);
-          // Remove invalid tokens
+          console.error("❌ Push error:", receipt.message, receipt.details);
           if (receipt.details?.error === "DeviceNotRegistered") {
-            const badToken = messages.find(m => m.to === receipt.id)?.to;
-            if (badToken) pushTokens.delete(badToken);
+            const badToken = chunk[idx]?.to;
+            if (badToken) {
+              console.log(`🗑️ Removing invalid token: ${badToken}`);
+              pushTokens.delete(badToken);
+            }
           }
         }
       });
