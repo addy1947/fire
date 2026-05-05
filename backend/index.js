@@ -32,7 +32,11 @@ io.on("connection", (socket) => {
 
 // ── Push Notification Helper ──────────────────────────────────
 async function sendPushNotifications(title, body, data = {}) {
-  if (pushTokens.size === 0) return;
+  console.log(`📤 Attempting push to ${pushTokens.size} registered token(s)...`);
+  if (pushTokens.size === 0) {
+    console.warn("⚠️ No push tokens registered — app may not have opened since last server restart");
+    return;
+  }
 
   const messages = [];
   for (const token of pushTokens) {
@@ -98,9 +102,16 @@ app.post("/register-token", (req, res) => {
     return res.status(400).json({ status: "error", message: "invalid Expo push token" });
   }
 
+  // Always add — Set deduplicates automatically
+  // This ensures token is re-registered after Render restarts
   pushTokens.add(token);
-  console.log(`📲 Token registered: ${token} (total: ${pushTokens.size})`);
-  return res.status(200).json({ status: "ok" });
+  console.log(`📲 Token registered/refreshed: ${token} (total: ${pushTokens.size})`);
+  return res.status(200).json({ status: "ok", totalTokens: pushTokens.size });
+});
+
+// GET /tokens  ← Debug: see how many tokens are registered
+app.get("/tokens", (req, res) => {
+  res.json({ registeredTokens: pushTokens.size, tokens: [...pushTokens] });
 });
 
 // POST /data  ← ESP32 sends here every 2s
