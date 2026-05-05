@@ -10,7 +10,7 @@ const { Expo }   = require("expo-server-sdk");
 const app    = express();
 const server = http.createServer(app);
 const io     = new Server(server, { cors: { origin: "*" } });
-const expo   = new Expo();
+const expo   = new Expo({ accessToken: process.env.EXPO_ACCESS_TOKEN });
 
 const PORT = process.env.PORT || 3000;
 

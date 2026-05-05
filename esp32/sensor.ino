@@ -17,7 +17,7 @@ const char* DEVICE_ID  = "ESP32-01";
 #define FLAME_PIN   22
 #define MQ2_DIGITAL 23
 #define MQ2_ANALOG  34
-#define BUZZER_PIN  19
+#define BUZZER_PIN  18    // was 19 — GPIO19 is USB D-, held LOW by USB hardware
 
 DHT dht(DHTPIN, DHTTYPE);
 
